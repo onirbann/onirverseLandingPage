@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onirverse | Where AI Dreams Become Reality</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+        /* Base styles */
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+            color: #e0e0e0;
+            overflow-x: hidden; /* Prevent horizontal scroll ONLY */
+        }
+
+        /* Enable smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Star background styles */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        /* Star animation */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Galaxy path animation styles */
+        .galaxy-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 8s linear forwards infinite;
+        }
+
+        /* Galaxy path animation */
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Pulse animation styles */
+        .pulse {
+            animation: pulse 4s infinite;
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Float animation styles */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Float animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Glow effect for text */
+        .glow {
+            text-shadow: 0 0 10px rgba(100, 149, 237, 0.8);
+        }
+
+        /* Gradient text styles */
+        .gradient-text {
+            background: linear-gradient(90deg, #8a2be2, #00bfff, #8a2be2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradient 3s linear infinite;
+        }
+
+        /* Gradient text animation */
+        @keyframes gradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+             max-height: 500px; /* Adjust as needed */
+             opacity: 1;
+        }
+
+        /* Slow bounce animation */
+        .slow-bounce {
+            animation: slow-bounce 5s ease-in-out infinite;
+        }
+
+        @keyframes slow-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); } /* Adjust bounce height */
+        }
+
+        /* --- NEW CSS FOR REPLACEMENTS --- */
+
+        /* Pulsating Gradient Orb (Hero Section) */
+        .pulsating-orb {
+            width: 100%;
+            padding-bottom: 100%; /* Maintain aspect ratio (square) */
+            position: relative;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(138, 43, 226, 0.6) 0%, rgba(0, 191, 255, 0.4) 40%, rgba(13, 29, 49, 0) 70%);
+            animation: pulsating-gradient 5s infinite ease-in-out;
+            box-shadow: 0 0 30px rgba(100, 149, 237, 0.3), inset 0 0 20px rgba(200, 200, 255, 0.2);
+        }
+
+        @keyframes pulsating-gradient {
+            0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 25px rgba(100, 149, 237, 0.2), inset 0 0 15px rgba(200, 200, 255, 0.1); }
+            50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 40px rgba(100, 149, 237, 0.4), inset 0 0 25px rgba(200, 200, 255, 0.3); }
+            100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 25px rgba(100, 149, 237, 0.2), inset 0 0 15px rgba(200, 200, 255, 0.1); }
+        }
+
+        /* Rotating Icon (Technology Section) */
+        .rotating-icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px; /* Ensure container has height */
+        }
+        .rotating-icon {
+            font-size: 150px; /* Large icon */
+            color: #8a2be2; /* Match theme */
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+            animation: spin-slow 15s linear infinite;
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        /* --- END OF NEW CSS --- */
+
+    </style>
+</head>
+<body class="min-h-screen relative">
+    <div id="stars-container" class="fixed inset-0 z-0 pointer-events-none"></div>
+
+    <div class="relative z-10">
+        <nav class="container mx-auto px-6 py-8">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg">
+                         <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor" fill-opacity="0.5"/>
+                            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                            <path d="M12 5.5c-3.86 0-7 2.61-7 6.5s3.14 6.5 7 6.5 7-2.61 7-6.5-3.14-6.5-7-6.5zm0 11c-2.76 0-5-1.79-5-4.5s2.24-4.5 5-4.5 5 1.79 5 4.5-2.24 4.5-5 4.5z" fill="currentColor" fill-opacity="0.7"/>
+                            <path d="M6.34 7.34l1.42-1.42c.78-.78 1.8-1.22 2.9-1.38C11.1 4.4 11.54 4 12 4s.9.4 1.34.54c1.1.16 2.12.6 2.9 1.38l1.42 1.42c.78.78 1.22 1.8 1.38 2.9.14.44.54.88.54 1.34s-.4.9-.54 1.34c-.16 1.1-.6 2.12-1.38 2.9l-1.42 1.42c-.78.78-1.8 1.22-2.9 1.38-.44.14-.88.54-1.34.54s-.9-.4-1.34-.54c-1.1-.16-2.12-.6-2.9-1.38l-1.42-1.42c-.78-.78-1.22-1.8-1.38-2.9C4.4 12.9 4 12.46 4 12s.4-.9.54-1.34c.16-1.1.6-2.12 1.38-2.9z" fill="currentColor" fill-opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">ONIRVERSE</span>
+                </a>
+                <div class="hidden md:flex space-x-10">
+                    <a href="#home" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+                    <a href="#vision" class="text-gray-300 hover:text-white transition duration-300">Vision</a>
+                    <a href="#technology" class="text-gray-300 hover:text-white transition duration-300">Technology</a>
+                    <a href="#journey" class="text-gray-300 hover:text-white transition duration-300">Journey</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="md:hidden mt-4 space-y-4 text-center">
+                 <a href="#home" class="block py-2 text-gray-300 hover:text-white transition duration-300">Home</a>
+                 <a href="#vision" class="block py-2 text-gray-300 hover:text-white transition duration-300">Vision</a>
+                 <a href="#technology" class="block py-2 text-gray-300 hover:text-white transition duration-300">Technology</a>
+                 <a href="#journey" class="block py-2 text-gray-300 hover:text-white transition duration-300">Journey</a>
+            </div>
+        </nav>
+
+        <section id="home" class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-16 md:mb-0 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    <span class="gradient-text">AI Dreams</span><br>
+                    <span class="text-white">Brought to</span><br>
+                    <span class="glow">Cosmic Reality</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-10 max-w-lg mx-auto md:mx-0">
+                    Onirverse is the nexus where artificial intelligence and human imagination collide, weaving the threads of thought into tangible, explorable universes.
+                </p>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#journey" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-white font-semibold hover:opacity-90 transition duration-300 transform hover:scale-105 inline-block">
+                        Explore the Cosmos
+                    </a>
+                    </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-full max-w-md">
+                    <div class="absolute -top-20 -left-20 w-40 h-40 bg-purple-500 rounded-full filter blur-3xl opacity-20 pointer-events-none"></div>
+                    <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-blue-500 rounded-full filter blur-3xl opacity-20 pointer-events-none"></div>
+                    <div class="relative float">
+                        <div class="pulsating-orb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="relative py-20 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <svg width="1200" height="600" viewBox="0 0 1200 600" class="w-full h-auto opacity-20">
+                    <path class="galaxy-path" d="M100,300 Q300,100 500,300 T900,300" stroke="#8a2be2" stroke-width="2" fill="none" style="animation-delay: -2s;"/>
+                    <path class="galaxy-path" d="M100,300 Q300,500 500,300 T900,300" stroke="#00bfff" stroke-width="2" fill="none" style="animation-delay: -4s;"/>
+                    <path class="galaxy-path" d="M200,200 Q400,400 600,200 T1000,400" stroke="#8a2be2" stroke-width="1" fill="none" style="animation-delay: -6s;"/>
+                    <path class="galaxy-path" d="M200,400 Q400,200 600,400 T1000,200" stroke="#00bfff" stroke-width="1" fill="none" style="animation-delay: -8s;"/>
+                    <circle cx="100" cy="300" r="8" fill="#8a2be2" class="pulse" />
+                    <circle cx="500" cy="300" r="8" fill="#00bfff" class="pulse" style="animation-delay: 0.5s;" />
+                    <circle cx="900" cy="300" r="8" fill="#8a2be2" class="pulse" style="animation-delay: 1s;" />
+                    <circle cx="300" cy="100" r="6" fill="#00bfff" class="pulse" style="animation-delay: 1.5s;" />
+                    <circle cx="300" cy="500" r="6" fill="#8a2be2" class="pulse" style="animation-delay: 2s;" />
+                     <circle cx="700" cy="150" r="5" fill="#00bfff" class="pulse" style="animation-delay: 2.5s;" />
+                    <circle cx="700" cy="450" r="5" fill="#8a2be2" class="pulse" style="animation-delay: 3s;" />
+                </svg>
+            </div>
+            <div class="container mx-auto px-6 relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-20 gradient-text">Our Cosmic Vision</h2>
+                <p class="text-xl text-center text-gray-300 max-w-3xl mx-auto mb-16">
+                    We envision a universe where the boundaries between thought and creation dissolve. Onirverse is the bridge, translating the ephemeral language of dreams into interactive digital realities, fostering a new era of human-AI collaboration. It's about connecting minds across the digital void, building worlds from shared imagination.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-purple-500 transition duration-500 transform hover:-translate-y-2 shadow-lg">
+                        <div class="w-16 h-16 bg-purple-900 bg-opacity-50 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-lightbulb text-2xl text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">Idea Genesis</h3>
+                        <p class="text-gray-300">
+                            Plant the seed of an idea, a fleeting dream, or a complex concept. Our AI nurtures it, exploring its potential within the vast Onirverse.
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-blue-500 transition duration-500 transform hover:-translate-y-2 shadow-lg">
+                        <div class="w-16 h-16 bg-blue-900 bg-opacity-50 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-palette text-2xl text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">Reality Weaving</h3>
+                        <p class="text-gray-300">
+                            Witness abstract thoughts materialize into stunning visuals, intricate narratives, and interactive experiences, shaped by intelligent algorithms.
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-purple-500 transition duration-500 transform hover:-translate-y-2 shadow-lg">
+                        <div class="w-16 h-16 bg-indigo-900 bg-opacity-50 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-globe-americas text-2xl text-indigo-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">Shared Universes</h3>
+                        <p class="text-gray-300">
+                            Connect your creations to the ever-expanding network. Explore, collaborate, and build upon the dreams of others in a collective cosmic tapestry.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="technology" class="py-32 relative bg-black bg-opacity-20">
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
+                <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-600 rounded-full filter blur-3xl opacity-10 animate-pulse" style="animation-delay: 1s;"></div>
+            </div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-20">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">The Engine of Creation</h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        Onirverse is powered by a symphony of cutting-edge technologies, designed to understand, interpret, and manifest the complexities of human imagination.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 md:order-1">
+                        <div class="space-y-10">
+                            <div class="flex items-start space-x-6">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                                        <i class="fas fa-brain text-white text-xl"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-3">Deep Neural Synthesis</h3>
+                                    <p class="text-gray-300">
+                                        Advanced neural networks analyze the semantic and emotional context of your ideas, generating multi-modal outputs that resonate with the original intent.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-6">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+                                        <i class="fas fa-cogs text-white text-xl"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-3">Quantum-Inspired Processing</h3>
+                                    <p class="text-gray-300">
+                                        We utilize algorithms inspired by quantum mechanics to explore vast possibility spaces efficiently, enabling the creation of truly novel and complex realities.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-6">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center shadow-md">
+                                        <i class="fas fa-network-wired text-white text-xl"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-3">Decentralized Cosmic Ledger</h3>
+                                    <p class="text-gray-300">
+                                        Creations are interconnected through a secure, decentralized network, ensuring persistence, provenance, and enabling seamless collaboration across the Onirverse.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 relative">
+                        <div class="relative w-full max-w-lg mx-auto">
+                             <div class="absolute -top-10 -left-10 w-64 h-64 bg-purple-500 rounded-full filter blur-3xl opacity-10 pointer-events-none"></div>
+                            <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-10 pointer-events-none"></div>
+                            <div class="relative pulse rotating-icon-container">
+                                <i class="fas fa-atom rotating-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="py-32 bg-gradient-to-b from-gray-900 to-black bg-opacity-50">
+            <div class="container mx-auto px-6">
+                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">Embark on Your Journey</h2>
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-xl">
+                        <i class="fas fa-rocket text-3xl text-white"></i>
+                    </div>
+                    <p class="text-2xl md:text-3xl text-gray-200 mb-10 leading-relaxed">
+                        "The journey into the Onirverse begins with a single thought. It's an expedition into the heart of your own imagination, amplified by the power of AI. What worlds will you discover? What realities will you create?"
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white text-2xl shadow-md slow-bounce">
+                             <i class="fas fa-globe"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold">The Architects</h4>
+                            <p class="text-gray-400">Guardians of the Onirverse</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 relative">
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                 <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                    <svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <path d="M0,300 C150,500 350,100 600,300 S1050,100 1200,300" stroke="#8a2be2" stroke-width="1.5" fill="none" opacity="0.5" class="galaxy-path" style="animation-duration: 15s;"/>
+                        <path d="M0,300 C150,100 350,500 600,300 S1050,500 1200,300" stroke="#00bfff" stroke-width="1.5" fill="none" opacity="0.5" class="galaxy-path" style="animation-duration: 15s; animation-delay: -7.5s;"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-4xl mx-auto text-center bg-gradient-to-br from-gray-900 to-gray-800 p-12 rounded-3xl border border-gray-700 shadow-xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">Ready to Manifest Your Dreams?</h2>
+                    <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        Step into the Onirverse. Join the pioneers shaping new realities where artificial intelligence and human creativity merge into something truly extraordinary. Your cosmic journey awaits.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a href="#journey" class="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-white font-semibold hover:opacity-90 transition duration-300 transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <span>Begin Your Journey</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                         </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-16 border-t border-gray-800 bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                    <div class="flex items-center space-x-3 mb-6 md:mb-0">
+                         <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-md">
+                             <svg class="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor" fill-opacity="0.5"/>
+                                <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">ONIRVERSE</span>
+                    </div>
+                    <div class="text-gray-500 text-sm">
+                        &copy; <span id="current-year"></span> Onirverse. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // --- Star Generation ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const starsContainer = document.getElementById('stars-container');
+            // Reduce star count slightly for potentially better performance
+            const starsCount = 120;
+
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+
+                // Random size between 1 and 2.5 pixels
+                const size = Math.random() * 1.5 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+
+                // Random animation duration between 3 and 7 seconds for a slower twinkle
+                star.style.setProperty('--duration', `${Math.random() * 4 + 3}s`);
+                 // Add random delay to stagger the twinkling
+                star.style.animationDelay = `${Math.random() * 5}s`;
+
+
+                starsContainer.appendChild(star);
+            }
+
+            // --- Floating Elements Animation Delay ---
+            // Apply staggered delay to elements with the 'float' class
+            const floatingElements = document.querySelectorAll('.float');
+            floatingElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.5}s`;
+            });
+
+            // --- Pulse Animation Delay ---
+            // Apply staggered delay to elements with the 'pulse' class
+            const pulseElements = document.querySelectorAll('.pulse');
+            pulseElements.forEach((el, index) => {
+                 // Use a smaller increment for delay if many elements pulse
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+
+            // --- Mobile Menu Toggle ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('open');
+                    // Optional: Change button icon (e.g., to X) when open
+                    const icon = menuButton.querySelector('svg path');
+                    if (mobileMenu.classList.contains('open')) {
+                         // Change to 'X' icon path data
+                        icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                    } else {
+                        // Change back to hamburger icon path data
+                        icon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+                    }
+                });
+
+                // Close menu when a link is clicked
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                         mobileMenu.classList.remove('open');
+                         // Reset icon
+                         const icon = menuButton.querySelector('svg path');
+                         icon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+                    });
+                });
+            }
+
+             // --- Set Current Year in Footer ---
+             const yearSpan = document.getElementById('current-year');
+             if(yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+             }
+
+        });
+    </script>
+</body>
+</html>
